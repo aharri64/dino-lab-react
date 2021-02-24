@@ -1,27 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
-import Comment from './Comments'
+import { Component } from 'react';
+import Comment from './Comment';
 
-function App() {
-  const post = {
+class App extends Component {
+  // name and sotre variables before return statement
+  state = {
     title: "Dinosaurs are awesome",
     author: "Stealthy Stegosaurus",
-    body: "Check out this body property!"
+    body: "Checkout out this body property",
+    comments: ['First!', 'Great post', 'Hire this author now!']
   }
-  const comments = [ "First!", "Great post", "Hire this author now!" ]
+  render () {
+    const post = {
+      title: "Dinosaurs are awesome",
+      author: "Stealthy Stegosaurus",
+      body: "Checkout out this body property",
+      comments: ['First!', 'Great post', 'Hire this author now!']
+    }
+    // map returns an array 
+    const comments = post.comments.map((comment, index)=> (<Comment text={comment} key={index}/>))
+    // comments = [ <Comment text={post.comments[0]} />, <Comment text={post.comments[1]} />, <Comment text={post.comments[1]} />]
 
-  return (
-    <div className="App">
-      <h1>{post.title}</h1> {/* can use variables with curly brackets */}
-      <h3>by {post.author}</h3>
-      <h3>{post.body}</h3>
-      <ul>
-        {comments.map(comment => (
-          <li>{comment}</li>
-        ))}
-      </ul>
-    </div>
-  );
+    return (
+      <div className="App">
+        <h1>{this.state.title}</h1>
+        <p>by {this.state.author}</p>
+        <p>{this.state.body}</p>
+        <h3>Comments:</h3>
+        <p>{this.state.comments[0]}</p>
+        { comments }
+      </div>
+    );
+  }
 }
 
 export default App;
